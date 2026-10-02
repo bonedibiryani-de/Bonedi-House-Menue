@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Bonedi House · Menu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  :root {
+    --maroon: #6b1f2a;
+    --maroon-deep: #4a141c;
+    --ink: #2a1f17;
+    --ink-soft: #5a4a3c;
+    --muted: #9a8a7a;
+    --gold: #b8894a;
+    --gold-deep: #9a6f38;
+    --gold-bright: #e8c98a;
+    --gold-light: #f0d9a8;
+    --cream: #fbf7f0;
+    --white: #ffffff;
+    --line: #ece4d8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', system-ui, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.5;
+    padding-bottom: 40px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== MAROON HERO ===== */
+  .hero {
+    position: relative;
+    background:
+      radial-gradient(circle at 50% 0%, rgba(184,137,74,0.14), transparent 60%),
+      linear-gradient(180deg, var(--maroon) 0%, var(--maroon-deep) 100%);
+    padding: 46px 20px 40px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      var(--gold) 20%,
+      var(--gold-bright) 50%,
+      var(--gold) 80%,
+      transparent 100%);
+    opacity: 0.9;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 14px),
+      repeating-linear-gradient(-45deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 14px);
+    pointer-events: none;
+  }
+
+  /* ===== BRAND — GOLD on maroon ===== */
+  .brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 700;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(180deg, var(--gold-light) 0%, var(--gold-bright) 45%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.1;
+    filter: drop-shadow(0 1px 6px rgba(0,0,0,0.35));
+  }
+
+  .brand-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 14px;
+    position: relative;
+    z-index: 1;
+  }
+  .brand-line span {
+    height: 1px;
+    width: 36px;
+    background: var(--gold-bright);
+    opacity: 0.7;
+  }
+  .brand-line em {
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    letter-spacing: 3px;
+    color: var(--gold-light);
+    font-weight: 500;
+    opacity: 0.92;
+  }
+
+  /* ===== MENU ===== */
+  .menu {
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 24px 20px 0;
+  }
+
+  .section-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--maroon);
+    margin: 30px 0 4px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(107,31,42,0.35), transparent);
+  }
+
+  .sub-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--maroon);
+    margin: 20px 0 2px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0.85;
+  }
+  .sub-label::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.95;
+  }
+
+  .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .item:last-child { border-bottom: none; }
+
+  .item-body { flex: 1; min-width: 0; }
+
+  .item-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: 0.2px;
+    line-height: 1.3;
+  }
+
+  .item-sub {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 400;
+    margin-top: 3px;
+  }
+
+  .item-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--maroon);
+    white-space: nowrap;
+    padding-top: 2px;
+    letter-spacing: 0.3px;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    max-width: 620px;
+    margin: 40px auto 0;
+    padding: 28px 20px 0;
+    text-align: center;
+    border-top: 1px solid var(--line);
+  }
+
+  .footer p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--maroon);
+    opacity: 0.85;
+  }
+
+  /* ===== DESKTOP POLISH ===== */
+  @media (min-width: 640px) {
+    .hero { padding: 56px 20px 48px; }
+    .brand { font-size: 48px; letter-spacing: 8px; }
+    .item-name { font-size: 19px; }
+    .item { padding: 15px 0; }
+    .brand-line em { font-size: 17px; }
+    .footer p { font-size: 17px; letter-spacing: 5px; }
+  }
+
+  .hero, .menu { animation: fadeUp 0.6s ease both; }
+  .menu { animation-delay: 0.1s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ===== MAROON HERO ===== -->
+  <header class="hero">
+    <h1 class="brand">Bonedi House</h1>
+    <div class="brand-line">
+      <span></span>
+      <em>Bengal Rediscovered</em>
+      <span></span>
+    </div>
+  </header>
+
+  <!-- ===== MENU ===== -->
+  <main class="menu">
+
+    <!-- STARTERS -->
+    <div class="section-label">Starters</div>
+
+    <div class="item">
+      <div class="item-body">
+        <div class="item-name">Chhana Koraisutir Chop</div>
+        <div class="item-sub">Veg · 2 Pcs</div>
+      </div>
+      <div class="item-price">₹239</div>
+    </div>
+
+    <div class="item">
+      <div class="item-body">
+        <div class="item-name">Bhetki'r Gopon Bilash</div>
+        <div class="item-sub">Fish · 2 Pcs</div>
+      </div>
+      <div class="item-price">₹589</div>
+    </div>
+
+    <div class="item">
+      <div class="item-body">
+        <div class="item-name">Shora Chingre Putli</div>
+        <div class="item-sub">Fish</div>
+      </div>
+      <div class="item-price">₹379</div>
+    </div>
+
+    <div class="item">
+      <div class="item-body">
+        <div class="item-name">Gondher Rani Murghir Bhaji</div>
+        <div class="item-sub">Chicken</div>
+      </div>
+      <div class="item-price">₹279</div>
+    </div>
+
+    <!-- BIRYANIS -->
+    <div class="section-label">Biryanis</div>
+
+    <div class="sub-label">Mutton</div>
+
+    <div class="item">
+      <div class="item-body">
+        <div class="item-name">Bonedi Ekla Bari · Mutton</div>
+        <div class="item-sub">1 Serving</div>
+      </div>
+      <div class="item-price">₹399</div>
+    </div>
+
+    <div class="item">
+      <div class="item-body">
+        <div class="item-name">Bonedi Rajbari Handi · Mutton</div>
+        <div class="item-sub">2 Servings</div>
+      </div>
+      <div class="item-price">₹789</div>
+    </div>
+
+    <div class="item">
+      <div class="item-body">
+        <div class="item-name">Bonedi Zamindar Dawat · Mutton</div>
+        <div class="item-sub">4 Servings</div>
+      </div>
+      <div class="item-price">₹1499</div>
+    </div>
+
+    <div class="sub-label">Chicken</div>
+
+    <div class="item">
+      <div class="item-body">
+        <div class="item-name">Bonedi Ekla Bari · Chicken</div>
+        <div class="item-sub">1 Serving</div>
+      </div>
+      <div class="item-price">₹339</div>
+    </div>
+
+    <div class="item">
+      <div class="item-body">
+        <div class="item-name">Bonedi Rajbari Handi · Chicken</div>
+        <div class="item-sub">2 Servings</div>
+      </div>
+      <div class="item-price">₹769</div>
+    </div>
+
+    <div class="item">
+      <div class="item-body">
+        <div class="item-name">Bonedi Zamindar Dawat · Chicken</div>
+        <div class="item-sub">4 Servings</div>
+      </div>
+      <div class="item-price">₹1339</div>
+    </div>
+
+    <div class="sub-label">Egg</div>
+
+    <div class="item">
+      <div class="item-body">
+        <div class="item-name">Bonedi Ekla Bari · Egg</div>
+        <div class="item-sub">1 Serving</div>
+      </div>
+      <div class="item-price">₹199</div>
+    </div>
+
+    <div class="item">
+      <div class="item-body">
+        <div class="item-name">Bonedi Rajbari Handi · Egg</div>
+        <div class="item-sub">2 Servings</div>
+      </div>
+      <div class="item-price">₹389</div>
+    </div>
+
+    <div class="item">
+      <div class="item-body">
+        <div class="item-name">Bonedi Zamindar Dawat · Egg</div>
+        <div class="item-sub">4 Servings</div>
+      </div>
+      <div class="item-price">₹589</div>
+    </div>
+
+    <div class="sub-label">Aloo</div>
+
+    <div class="item">
+      <div class="item-body">
+        <div class="item-name">Bonedi Ekla Bari · Aloo</div>
+        <div class="item-sub">1 Serving</div>
+      </div>
+      <div class="item-price">₹149</div>
+    </div>
+
+    <div class="item">
+      <div class="item-body">
+        <div class="item-name">Bonedi Rajbari Handi · Aloo</div>
+        <div class="item-sub">2 Servings</div>
+      </div>
+      <div class="item-price">₹289</div>
+    </div>
+
+    <div class="item">
+      <div class="item-body">
+        <div class="item-name">Bonedi Zamindar Dawat · Aloo</div>
+        <div class="item-sub">4 Servings</div>
+      </div>
+      <div class="item-price">₹589</div>
+    </div>
+
+    <!-- EXTRAS -->
+    <div class="section-label">Extras</div>
+
+    <div class="item">
+      <div class="item-body">
+        <div class="item-name">Extra Aloo Piece</div>
+        <div class="item-sub">1 Pc</div>
+      </div>
+      <div class="item-price">₹20</div>
+    </div>
+
+    <div class="item">
+      <div class="item-body">
+        <div class="item-name">Extra Egg</div>
+        <div class="item-sub">1 Pc</div>
+      </div>
+      <div class="item-price">₹20</div>
+    </div>
+
+    <!-- SIDE DISHES -->
+    <div class="section-label">Side Dishes</div>
+
+    <div class="item">
+      <div class="item-body">
+        <div class="item-name">Mutton Rezala</div>
+        <div class="item-sub">1 Serving</div>
+      </div>
+      <div class="item-price">₹179</div>
+    </div>
+
+    <div class="item">
+      <div class="item-body">
+        <div class="item-name">Mutton Rezala</div>
+        <div class="item-sub">2 Servings</div>
+      </div>
+      <div class="item-price">₹379</div>
+    </div>
+
+    <div class="item">
+      <div class="item-body">
+        <div class="item-name">Chicken Chaap</div>
+        <div class="item-sub">1 Serving</div>
+      </div>
+      <div class="item-price">₹179</div>
+    </div>
+
+    <div class="item">
+      <div class="item-body">
+        <div class="item-name">Chicken Chaap</div>
+        <div class="item-sub">2 Servings</div>
+      </div>
+      <div class="item-price">₹349</div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <p>Bonedi House</p>
+    </footer>
+
+  </main>
+
+</body>
+</html>
