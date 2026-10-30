@@ -6,259 +6,392 @@
 <title>Bonedi House · Menu</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
   :root {
-    --maroon: #6b1f2a;
-    --maroon-deep: #4a141c;
-    --ink: #2a1f17;
-    --ink-soft: #5a4a3c;
-    --muted: #9a8a7a;
-    --gold: #b8894a;
-    --gold-deep: #9a6f38;
-    --gold-bright: #e8c98a;
-    --gold-light: #f0d9a8;
-    --cream: #fbf7f0;
-    --white: #ffffff;
-    --line: #ece4d8;
+    /* maroon-brown palette */
+    --bg: #2a1412;
+    --bg-deep: #1e0e0c;
+    --bg-maroon: #3d1a18;
+    --panel: #331715;
+    --panel-2: #3f1e1a;
+    --panel-hover: #4a231e;
+    --ink: #f5efe4;
+    --ink-soft: #d8c7b6;
+    --muted: #a8917e;
+    --gold: #d4af6a;
+    --gold-bright: #f2d99b;
+    --gold-deep: #a8823f;
+    --gold-glow: rgba(212,175,106,0.30);
+    --line: rgba(212,175,106,0.18);
+    --line-strong: rgba(212,175,106,0.42);
+    --radius: 22px;
   }
 
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'Jost', system-ui, sans-serif;
-    background: var(--cream);
-    color: var(--ink);
-    line-height: 1.5;
-    padding-bottom: 40px;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  /* ===== MAROON HERO ===== */
-  .hero {
-    position: relative;
+    font-family: 'Outfit', system-ui, sans-serif;
     background:
-      radial-gradient(circle at 50% 0%, rgba(184,137,74,0.14), transparent 60%),
-      linear-gradient(180deg, var(--maroon) 0%, var(--maroon-deep) 100%);
-    padding: 46px 20px 40px;
-    text-align: center;
-    overflow: hidden;
+      radial-gradient(circle at 50% -10%, rgba(212,175,106,0.14), transparent 55%),
+      radial-gradient(circle at 85% 75%, rgba(140,50,40,0.25), transparent 50%),
+      radial-gradient(circle at 10% 40%, rgba(90,25,20,0.30), transparent 55%),
+      linear-gradient(165deg, #2e1513 0%, #241010 45%, #1a0b0a 100%);
+    background-attachment: fixed;
+    color: var(--ink);
+    line-height: 1.55;
+    padding-bottom: 60px;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
 
-  .hero::before {
-    content: '';
+  /* floating gold dust */
+  .dust { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .dust i {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg,
-      transparent 0%,
-      var(--gold) 20%,
-      var(--gold-bright) 50%,
-      var(--gold) 80%,
-      transparent 100%);
-    opacity: 0.9;
-  }
-
-  .hero::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-      repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 14px),
-      repeating-linear-gradient(-45deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 14px);
-    pointer-events: none;
-  }
-
-  /* ===== BRAND — GOLD on maroon ===== */
-  .brand {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 38px;
-    font-weight: 700;
-    letter-spacing: 6px;
-    text-transform: uppercase;
-    position: relative;
-    z-index: 1;
-    background: linear-gradient(180deg, var(--gold-light) 0%, var(--gold-bright) 45%, var(--gold) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    line-height: 1.1;
-    filter: drop-shadow(0 1px 6px rgba(0,0,0,0.35));
-  }
-
-  .brand-line {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 14px;
-    position: relative;
-    z-index: 1;
-  }
-  .brand-line span {
-    height: 1px;
-    width: 36px;
+    width: 3px; height: 3px;
+    border-radius: 50%;
     background: var(--gold-bright);
-    opacity: 0.7;
+    box-shadow: 0 0 8px 2px var(--gold-glow);
+    opacity: 0;
+    animation: drift linear infinite;
   }
-  .brand-line em {
-    font-style: italic;
-    font-family: 'Cormorant Garamond', serif;
+  @keyframes drift {
+    0%   { transform: translateY(20px) scale(0.6); opacity: 0; }
+    15%  { opacity: 0.9; }
+    85%  { opacity: 0.5; }
+    100% { transform: translateY(-120vh) scale(1); opacity: 0; }
+  }
+
+  /* ===== TOP RIBBON ===== */
+  .ribbon {
+    position: sticky; top: 0; z-index: 20;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 22px;
+    background: rgba(42,20,18,0.78);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--line);
+  }
+  .ribbon::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.5;
+  }
+  .monogram {
+    font-family: 'Marcellus', serif;
+    font-weight: 400; font-size: 18px; letter-spacing: 5px;
+    background: linear-gradient(100deg, var(--gold-deep), var(--gold-bright) 50%, var(--gold-deep));
+    background-size: 200% auto;
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 6s linear infinite;
+  }
+  @keyframes shine { to { background-position: 200% center; } }
+  .ribbon-tag {
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative; z-index: 1;
+    text-align: center;
+    padding: 70px 22px 54px;
+    max-width: 760px; margin: 0 auto;
+  }
+
+  .crest {
+    width: 74px; height: 74px; margin: 0 auto 26px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    border: 1px solid var(--line-strong);
+    background: radial-gradient(circle at 50% 30%, rgba(212,175,106,0.25), transparent 70%);
+    position: relative;
+    animation: crestIn 1s cubic-bezier(0.2,0.9,0.3,1) both;
+  }
+  .crest::before {
+    content: ''; position: absolute; inset: -6px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    animation: pulseRing 3.4s ease-in-out infinite;
+  }
+  .crest span {
+    font-family: 'Marcellus', serif;
+    font-size: 32px;
+    background: linear-gradient(160deg, var(--gold-bright), var(--gold-deep));
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  @keyframes pulseRing {
+    0%,100% { transform: scale(1); opacity: 0.55; }
+    50% { transform: scale(1.12); opacity: 0.15; }
+  }
+  @keyframes crestIn {
+    from { opacity: 0; transform: scale(0.6) rotate(-12deg); }
+    to { opacity: 1; transform: scale(1) rotate(0); }
+  }
+
+  .hero h1 {
+    font-family: 'Marcellus', serif;
+    font-size: clamp(40px, 10.5vw, 74px);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: linear-gradient(180deg, #fff6e2 0%, var(--gold-bright) 40%, var(--gold) 70%, var(--gold-deep) 100%);
+    background-size: 100% 200%;
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 4px 22px rgba(212,175,106,0.30));
+    animation: heroRise 1s cubic-bezier(0.2,0.9,0.3,1) both, heroShimmer 7s ease-in-out infinite 1s;
+  }
+  @keyframes heroRise {
+    from { opacity: 0; transform: translateY(26px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes heroShimmer {
+    0%,100% { background-position: 50% 0%; }
+    50% { background-position: 50% 100%; }
+  }
+
+  .hero-rule {
+    display: flex; align-items: center; justify-content: center;
+    gap: 14px; margin-top: 22px;
+    animation: fadeUp 1s ease 0.25s both;
+  }
+  .hero-rule span {
+    height: 1px; width: 52px;
+    background: linear-gradient(90deg, transparent, var(--gold));
+  }
+  .hero-rule span:last-child { background: linear-gradient(90deg, var(--gold), transparent); }
+  .hero-rule em {
+    font-style: normal;
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px; font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+  }
+
+  .hero p {
+    margin: 22px auto 0;
+    max-width: 420px;
+    font-weight: 300;
     font-size: 15px;
-    letter-spacing: 3px;
-    color: var(--gold-light);
-    font-weight: 500;
-    opacity: 0.92;
+    color: var(--ink-soft);
+    animation: fadeUp 1s ease 0.4s both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   /* ===== MENU ===== */
   .menu {
-    max-width: 620px;
+    position: relative; z-index: 1;
+    max-width: 680px;
     margin: 0 auto;
-    padding: 24px 20px 0;
+    padding: 10px 20px 0;
   }
 
-  .section-label {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--maroon);
-    margin: 30px 0 4px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
+  .section-head {
+    display: flex; align-items: center; gap: 14px;
+    margin: 46px 0 18px;
+    opacity: 0; transform: translateY(18px);
+    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2,0.9,0.3,1);
   }
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, rgba(107,31,42,0.35), transparent);
+  .section-head.in { opacity: 1; transform: translateY(0); }
+  .section-head h2 {
+    font-family: 'Marcellus', serif;
+    font-size: 24px; font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+    white-space: nowrap;
+  }
+  .section-head .rule {
+    flex: 1; height: 1px;
+    background: linear-gradient(90deg, var(--line-strong), transparent);
+  }
+  .section-head .num {
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px; letter-spacing: 2px;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    padding: 3px 10px; border-radius: 100px;
   }
 
   .sub-label {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    color: var(--maroon);
-    margin: 20px 0 2px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    opacity: 0.85;
+    display: flex; align-items: center; gap: 10px;
+    margin: 26px 0 10px 4px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0; transform: translateX(-10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
   }
+  .sub-label.in { opacity: 1; transform: translateX(0); }
   .sub-label::before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
+    content: ''; width: 18px; height: 1px;
     background: var(--gold);
-    opacity: 0.95;
   }
 
+  /* ===== ITEM CARD ===== */
   .item {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 14px;
-    padding: 13px 0;
-    border-bottom: 1px solid var(--line);
+    position: relative;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px;
+    padding: 16px 20px;
+    margin-bottom: 10px;
+    border-radius: var(--radius);
+    background: linear-gradient(155deg, var(--panel-2), var(--panel));
+    border: 1px solid var(--line);
+    overflow: hidden;
+    opacity: 0; transform: translateY(24px) scale(0.98);
+    transition:
+      opacity 0.7s cubic-bezier(0.2,0.9,0.3,1),
+      transform 0.7s cubic-bezier(0.2,0.9,0.3,1),
+      background 0.35s ease,
+      border-color 0.35s ease,
+      box-shadow 0.35s ease;
   }
-  .item:last-child { border-bottom: none; }
+  .item.in {
+    opacity: 1; transform: translateY(0) scale(1);
+  }
+  .item::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(120deg, transparent 20%, rgba(242,217,155,0.14) 50%, transparent 80%);
+    transform: translateX(-130%);
+    transition: transform 0.9s ease;
+    pointer-events: none;
+  }
+  .item:hover {
+    background: linear-gradient(155deg, var(--panel-hover), var(--panel-2));
+    border-color: var(--line-strong);
+    box-shadow: 0 12px 38px -12px rgba(212,175,106,0.40), inset 0 0 0 1px rgba(212,175,106,0.08);
+  }
+  .item:hover::before { transform: translateX(130%); }
 
   .item-body { flex: 1; min-width: 0; }
-
   .item-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
-    font-weight: 600;
+    font-family: 'Marcellus', serif;
+    font-size: 18px; font-weight: 400;
+    letter-spacing: 0.8px;
     color: var(--ink);
-    letter-spacing: 0.2px;
     line-height: 1.3;
   }
-
   .item-sub {
-    font-size: 11px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--muted);
-    font-weight: 400;
-    margin-top: 3px;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--muted); font-weight: 400;
+    margin-top: 4px;
   }
-
   .item-price {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 19px;
-    font-weight: 700;
-    color: var(--maroon);
+    font-family: 'Marcellus', serif;
+    font-size: 20px;
+    letter-spacing: 0.5px;
     white-space: nowrap;
-    padding-top: 2px;
-    letter-spacing: 0.3px;
+    background: linear-gradient(160deg, var(--gold-bright), var(--gold-deep));
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 10px rgba(212,175,106,0.20));
+    transition: filter 0.35s ease, transform 0.35s ease;
+  }
+  .item:hover .item-price {
+    filter: drop-shadow(0 0 18px rgba(242,217,155,0.55));
+    transform: scale(1.06);
   }
 
   /* ===== FOOTER ===== */
   .footer {
-    max-width: 620px;
-    margin: 40px auto 0;
-    padding: 28px 20px 0;
+    position: relative; z-index: 1;
+    max-width: 680px; margin: 60px auto 0;
+    padding: 34px 22px 0;
     text-align: center;
     border-top: 1px solid var(--line);
   }
-
+  .footer-orn {
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    margin-bottom: 14px;
+  }
+  .footer-orn span {
+    height: 1px; width: 40px;
+    background: linear-gradient(90deg, transparent, var(--gold));
+  }
+  .footer-orn span:last-child { background: linear-gradient(90deg, var(--gold), transparent); }
+  .footer-orn i {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--gold-bright);
+    box-shadow: 0 0 12px var(--gold-glow);
+  }
   .footer p {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--maroon);
-    opacity: 0.85;
+    font-family: 'Marcellus', serif;
+    font-size: 16px; font-weight: 400;
+    letter-spacing: 8px; text-transform: uppercase;
+    background: linear-gradient(100deg, var(--gold-deep), var(--gold-bright) 50%, var(--gold-deep));
+    background-size: 200% auto;
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 6s linear infinite;
+  }
+  .footer small {
+    display: block; margin-top: 8px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--muted);
   }
 
-  /* ===== DESKTOP POLISH ===== */
+  /* ===== DESKTOP ===== */
   @media (min-width: 640px) {
-    .hero { padding: 56px 20px 48px; }
-    .brand { font-size: 48px; letter-spacing: 8px; }
-    .item-name { font-size: 19px; }
-    .item { padding: 15px 0; }
-    .brand-line em { font-size: 17px; }
-    .footer p { font-size: 17px; letter-spacing: 5px; }
+    .hero { padding: 96px 24px 64px; }
+    .item { padding: 18px 26px; }
+    .item-name { font-size: 20px; }
+    .item-price { font-size: 22px; }
+    .section-head h2 { font-size: 28px; }
+    .menu { padding: 10px 24px 0; }
   }
 
-  .hero, .menu { animation: fadeUp 0.6s ease both; }
-  .menu { animation-delay: 0.1s; }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+    .item, .section-head, .sub-label { opacity: 1 !important; transform: none !important; }
   }
 </style>
 </head>
 <body>
 
-  <!-- ===== MAROON HERO ===== -->
+  <!-- floating dust -->
+  <div class="dust" id="dust"></div>
+
+  <!-- TOP RIBBON -->
+  <div class="ribbon">
+    <div class="monogram">BONEDI</div>
+    <div class="ribbon-tag">Est. 2024</div>
+  </div>
+
+  <!-- HERO -->
   <header class="hero">
-    <h1 class="brand">Bonedi House</h1>
-    <div class="brand-line">
-      <span></span>
-      <em>Bengal Rediscovered</em>
-      <span></span>
-    </div>
+    <div class="crest"><span>B</span></div>
+    <h1>Bonedi House</h1>
+    <div class="hero-rule"><span></span><em>Bengal Rediscovered</em><span></span></div>
+    <p>Slow-cooked biryanis & signature starters, crafted in the heritage kitchens of Bengal.</p>
   </header>
 
-  <!-- ===== MENU ===== -->
+  <!-- MENU -->
   <main class="menu">
 
     <!-- SIGNATURE STARTERS -->
-    <div class="section-label">Signature Starters</div>
+    <div class="section-head reveal">
+      <h2>Signature Starters</h2>
+      <div class="rule"></div>
+      <span class="num">03</span>
+    </div>
 
-    <div class="item">
+    <div class="item reveal">
       <div class="item-body">
         <div class="item-name">Bhetki Kurkure</div>
         <div class="item-sub">Fish</div>
@@ -266,7 +399,7 @@
       <div class="item-price">₹389</div>
     </div>
 
-    <div class="item">
+    <div class="item reveal">
       <div class="item-body">
         <div class="item-name">Shora Chingre Putli</div>
         <div class="item-sub">Fish</div>
@@ -274,7 +407,7 @@
       <div class="item-price">₹379</div>
     </div>
 
-    <div class="item">
+    <div class="item reveal">
       <div class="item-body">
         <div class="item-name">Bhetki Gopan Bilash</div>
         <div class="item-sub">Fish</div>
@@ -283,11 +416,15 @@
     </div>
 
     <!-- BIRYANIS -->
-    <div class="section-label">Biryanis</div>
+    <div class="section-head reveal">
+      <h2>Biryanis</h2>
+      <div class="rule"></div>
+      <span class="num">04</span>
+    </div>
 
-    <div class="sub-label">Mutton</div>
+    <div class="sub-label reveal">Mutton</div>
 
-    <div class="item">
+    <div class="item reveal">
       <div class="item-body">
         <div class="item-name">Bonedi Ekla Bari · Mutton</div>
         <div class="item-sub">1 Serving</div>
@@ -295,7 +432,7 @@
       <div class="item-price">₹389</div>
     </div>
 
-    <div class="item">
+    <div class="item reveal">
       <div class="item-body">
         <div class="item-name">Bonedi Rajbari Handi · Mutton</div>
         <div class="item-sub">2 Servings</div>
@@ -303,7 +440,7 @@
       <div class="item-price">₹759</div>
     </div>
 
-    <div class="item">
+    <div class="item reveal">
       <div class="item-body">
         <div class="item-name">Bonedi Zamindar Dawat · Mutton</div>
         <div class="item-sub">4 Servings</div>
@@ -311,9 +448,9 @@
       <div class="item-price">₹1509</div>
     </div>
 
-    <div class="sub-label">Chicken</div>
+    <div class="sub-label reveal">Chicken</div>
 
-    <div class="item">
+    <div class="item reveal">
       <div class="item-body">
         <div class="item-name">Bonedi Ekla Bari · Chicken</div>
         <div class="item-sub">1 Serving</div>
@@ -321,7 +458,7 @@
       <div class="item-price">₹339</div>
     </div>
 
-    <div class="item">
+    <div class="item reveal">
       <div class="item-body">
         <div class="item-name">Bonedi Rajbari Handi · Chicken</div>
         <div class="item-sub">2 Servings</div>
@@ -329,7 +466,7 @@
       <div class="item-price">₹649</div>
     </div>
 
-    <div class="item">
+    <div class="item reveal">
       <div class="item-body">
         <div class="item-name">Bonedi Zamindar Dawat · Chicken</div>
         <div class="item-sub">4 Servings</div>
@@ -337,9 +474,9 @@
       <div class="item-price">₹1339</div>
     </div>
 
-    <div class="sub-label">Egg</div>
+    <div class="sub-label reveal">Egg</div>
 
-    <div class="item">
+    <div class="item reveal">
       <div class="item-body">
         <div class="item-name">Bonedi Ekla Bari · Egg</div>
         <div class="item-sub">1 Serving</div>
@@ -347,7 +484,7 @@
       <div class="item-price">₹199</div>
     </div>
 
-    <div class="item">
+    <div class="item reveal">
       <div class="item-body">
         <div class="item-name">Bonedi Rajbari Handi · Egg</div>
         <div class="item-sub">2 Servings</div>
@@ -355,7 +492,7 @@
       <div class="item-price">₹379</div>
     </div>
 
-    <div class="item">
+    <div class="item reveal">
       <div class="item-body">
         <div class="item-name">Bonedi Zamindar Dawat · Egg</div>
         <div class="item-sub">4 Servings</div>
@@ -363,9 +500,9 @@
       <div class="item-price">₹779</div>
     </div>
 
-    <div class="sub-label">Aloo</div>
+    <div class="sub-label reveal">Aloo</div>
 
-    <div class="item">
+    <div class="item reveal">
       <div class="item-body">
         <div class="item-name">Bonedi Ekla Bari · Aloo</div>
         <div class="item-sub">1 Serving</div>
@@ -373,7 +510,7 @@
       <div class="item-price">₹149</div>
     </div>
 
-    <div class="item">
+    <div class="item reveal">
       <div class="item-body">
         <div class="item-name">Bonedi Rajbari Handi · Aloo</div>
         <div class="item-sub">2 Servings</div>
@@ -381,7 +518,7 @@
       <div class="item-price">₹279</div>
     </div>
 
-    <div class="item">
+    <div class="item reveal">
       <div class="item-body">
         <div class="item-name">Bonedi Zamindar Dawat · Aloo</div>
         <div class="item-sub">4 Servings</div>
@@ -390,9 +527,13 @@
     </div>
 
     <!-- EXTRAS -->
-    <div class="section-label">Extras</div>
+    <div class="section-head reveal">
+      <h2>Extras</h2>
+      <div class="rule"></div>
+      <span class="num">01</span>
+    </div>
 
-    <div class="item">
+    <div class="item reveal">
       <div class="item-body">
         <div class="item-name">Extra Aloo Piece</div>
         <div class="item-sub">1 Pc</div>
@@ -401,9 +542,13 @@
     </div>
 
     <!-- SIDE DISHES -->
-    <div class="section-label">Side Dishes</div>
+    <div class="section-head reveal">
+      <h2>Side Dishes</h2>
+      <div class="rule"></div>
+      <span class="num">02</span>
+    </div>
 
-    <div class="item">
+    <div class="item reveal">
       <div class="item-body">
         <div class="item-name">Chicken Chaap</div>
         <div class="item-sub">1 Serving</div>
@@ -411,7 +556,7 @@
       <div class="item-price">₹179</div>
     </div>
 
-    <div class="item">
+    <div class="item reveal">
       <div class="item-body">
         <div class="item-name">Chicken Chaap</div>
         <div class="item-sub">2 Servings</div>
@@ -420,9 +565,13 @@
     </div>
 
     <!-- BEVERAGES -->
-    <div class="section-label">Beverages</div>
+    <div class="section-head reveal">
+      <h2>Beverages</h2>
+      <div class="rule"></div>
+      <span class="num">01</span>
+    </div>
 
-    <div class="item">
+    <div class="item reveal">
       <div class="item-body">
         <div class="item-name">Komla Dimala</div>
         <div class="item-sub">1 Glass</div>
@@ -432,10 +581,54 @@
 
     <!-- FOOTER -->
     <footer class="footer">
+      <div class="footer-orn"><span></span><i></i><span></span></div>
       <p>Bonedi House</p>
+      <small>Bengal Rediscovered</small>
     </footer>
 
   </main>
+
+<script>
+  /* ===== Floating gold dust ===== */
+  (function () {
+    const wrap = document.getElementById('dust');
+    const count = window.innerWidth < 640 ? 14 : 26;
+    for (let i = 0; i < count; i++) {
+      const d = document.createElement('i');
+      d.style.left = Math.random() * 100 + 'vw';
+      d.style.bottom = '-10px';
+      d.style.animationDuration = (12 + Math.random() * 16) + 's';
+      d.style.animationDelay = (-Math.random() * 20) + 's';
+      const s = 0.5 + Math.random() * 1.6;
+      d.style.transform = `scale(${s})`;
+      wrap.appendChild(d);
+    }
+  })();
+
+  /* ===== Scroll reveal ===== */
+  (function () {
+    const els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(el => el.classList.add('in'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const parent = el.parentElement;
+          const siblings = parent ? [...parent.querySelectorAll('.reveal')] : [];
+          const order = siblings.indexOf(el);
+          const delay = order > -1 ? (order % 6) * 60 : 0;
+          setTimeout(() => el.classList.add('in'), delay);
+          io.unobserve(el);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    els.forEach(el => io.observe(el));
+  })();
+</script>
 
 </body>
 </html>
